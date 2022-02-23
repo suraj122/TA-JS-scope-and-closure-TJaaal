@@ -4,8 +4,18 @@
 function percentage(marks, total) {
   return (marks * 100) / total;
 }
+```
 
 // Your code goes here
+
+```js
+let percentage = function (marks, total) {
+  return (marks * 100) / total;
+};
+
+let percentage = (marks, totoal) => {
+  return (marks * 100) / total;
+};
 ```
 
 2. Write Function Declaration or Function Expression next to the function.
@@ -17,11 +27,15 @@ function percentage(marks, total) {
 // Your answer
 ```
 
+Function Declaration
+
 ```js
 let percentage = function percentage(marks, total) {
   return (marks * 100) / total;
 };
 ```
+
+function Expression
 
 ```js
 let percentage = function (marks, total) {
@@ -29,11 +43,15 @@ let percentage = function (marks, total) {
 };
 ```
 
+Function Expression
+
 ```js
 let percentage = (marks, total) => {
   return (marks * 100) / total;
 };
 ```
+
+Function Expression(Arrow)
 
 ```js
 let percentage = (marks, total) => (marks * 100) / total;
@@ -50,12 +68,12 @@ function add(a, b) {
   return a + b;
 }
 
-let five = add(2, 3); // Answer
-five = add; // Answer
-five = five(10, 11); // Answer
+let five = add(2, 3); // valid
+five = add; // valid
+five = five(10, 11); // valid
 five = function () {
-  return 'Hello';
-}; // Answer
+  return "Hello";
+}; // valid
 ```
 
 6. What is the difference between function definition and function call? Explain with an example.
@@ -66,10 +84,10 @@ five = function () {
 
 ```js
 function hello() {
-  console.log('Hello World!');
+  console.log("Hello World!");
 }
 
-hello.user = 'Sam'; // valid or invalid
+hello.user = "Sam"; // valid
 ```
 
 9. What is higher order function explain with an example.

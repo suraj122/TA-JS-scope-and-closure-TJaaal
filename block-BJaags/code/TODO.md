@@ -53,6 +53,7 @@ function counter(){
   }
   return increment()
 }
+//
 ```
 
 Create the execution context diagram of the following code line by line.

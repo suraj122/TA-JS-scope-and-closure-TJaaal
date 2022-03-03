@@ -149,7 +149,7 @@ function sayHello() {
 }
 sayHello();
 
-console.log(name);
+console.log(name); // name is not defined
 ```
 
 13. Guess the output of the code below with a reason.
@@ -167,7 +167,7 @@ console.log(name); // Arya Stark
 if (true) {
   let name = "Arya Stark";
 }
-console.log(name); // Arya Stark
+console.log(name); // Name is not defined
 ```
 
 15. Guess the output of the code below with a reason.
@@ -207,7 +207,7 @@ function sample() {
   if (true) {
     let username = "John Snow";
   }
-  console.log(username);
+  console.log(username); // username is not defined
 }
 sample();
 ```
@@ -219,9 +219,9 @@ function sample() {
   var username = "Arya Stark";
   if (true) {
     var username = "John Snow";
-    console.log(username);
+    console.log(username); // John Snow
   }
-  console.log(username, "second");
+  console.log(username, "second"); // John Snow second
 }
 sample();
 ```

@@ -3,13 +3,23 @@
 1. Construct a function `objOfMatches` that accepts two arrays and a callback. `objOfMatches` will build an object and return it. To build the object, `objOfMatches` will test each element of the first array using the callback to see if the output matches the corresponding element (by index) of the second array. If there is a match, the element from the first array becomes a key in an object, and the element from the second array becomes the corresponding value.
 
 ```js
-function objOfMatches(array1, array2, callback) {}
+function objOfMatches(array1, array2, callback) {
+  let final = {};
+  for (let el of array1) {
+    for (let el2 of array2) {
+      if (callback(el) === el2) {
+        final[el] = el2;
+      }
+    }
+  }
+  return final;
+}
 
 // TEST
 console.log(
   objOfMatches(
-    ['hi', 'howdy', 'bye', 'later', 'hello'],
-    ['HI', 'Howdy', 'BYE', 'LATER', 'hello'],
+    ["hi", "howdy", "bye", "later", "hello"],
+    ["HI", "Howdy", "BYE", "LATER", "hello"],
     function (str) {
       return str.toUpperCase();
     }
@@ -20,20 +30,28 @@ console.log(
 2. Construct a function `multiMap` that will accept two arrays: an array of values and an array of callbacks. `multiMap` will return an object whose keys match the elements in the array of values. The corresponding values that are assigned to the keys will be arrays consisting of outputs from the array of callbacks, where the input to each callback is the key.
 
 ```js
-function multiMap(arrVals, arrCallbacks) {}
+function multiMap(arrVals, arrCallbacks) {
+  let final = {};
+  for (let el of arrVals) {
+    let arr = [];
+    for (let cb of arrCallbacks) {
+      arr.push(cb(el));
+    }
+    final[el] = arr;
+  }
+  return final;
+}
 
 // TEST
 console.log(
   multiMap(
-    ['catfood', 'glue', 'beer'],
+    ["catfood", "glue", "beer"],
     [
       function (str) {
         return str.toUpperCase();
       },
       function (str) {
-        return (
-          str[0].toUpperCase() + str.slice(1).toLowerCase()
-        );
+        return str[0].toUpperCase() + str.slice(1).toLowerCase();
       },
       function (str) {
         return str + str;
@@ -50,21 +68,29 @@ To build the object, `objOfMatchesWithArray` will test each element of the first
 The final output from the third array will be matched agains the same indexed element of second array. If there is a match, the element from the first array becomes a key in an object, and the element from the second array becomes the corresponding value.
 
 ```js
-function objOfMatchesWithArray(array1, array2, callback) {}
+function objOfMatchesWithArray(array1, array2, callback) {
+  let final = [];
+  for (let el of array1) {
+    let str = "";
+    for (let cb of callback) {
+      str += cb(el);
+    }
+    final.push(str);
+  }
+  return final;
+}
 
 // TEST
 console.log(
   objOfMatchesWithArray(
-    ['hi', 'howdy', 'bye', 'later', 'hello'],
-    ['HiHi', 'HowdyHowdy', 'BYEBYE', 'LATER', 'helloHello'],
+    ["hi", "howdy", "bye", "later", "hello"],
+    ["HiHi", "HowdyHowdy", "BYEBYE", "LATER", "helloHello"],
     [
       function (str) {
         return str.toUpperCase();
       },
       function (str) {
-        return (
-          str[0].toUpperCase() + str.slice(1).toLowerCase()
-        );
+        return str[0].toUpperCase() + str.slice(1).toLowerCase();
       },
       function (str) {
         return str + str;
@@ -86,15 +112,13 @@ function objOfMatchesWithArray(array1, array2, callback) {}
 // TEST
 console.log(
   objOfMatchesWithArray(
-    ['hi', 'howdy', 'bye'],
+    ["hi", "howdy", "bye"],
     [
       function (str) {
         return str.toUpperCase();
       },
       function (str) {
-        return (
-          str[0].toUpperCase() + str.slice(1).toLowerCase()
-        );
+        return str[0].toUpperCase() + str.slice(1).toLowerCase();
       },
       function (str) {
         return str + str;
@@ -108,13 +132,13 @@ console.log(
 
 ```js
 function sayHi() {
-  console.log('Hi');
+  console.log("Hi");
 }
 function sayHello() {
-  console.log('Hello');
+  console.log("Hello");
 }
 function sayHey() {
-  console.log('Hey');
+  console.log("Hey");
 }
 ```
 
@@ -126,13 +150,13 @@ The function `schedule` will execute the function at first index after the value
 function schedule() {}
 
 function sayHi() {
-  console.log('Hi');
+  console.log("Hi");
 }
 function sayHello() {
-  console.log('Hello');
+  console.log("Hello");
 }
 function sayHey() {
-  console.log('Hey');
+  console.log("Hey");
 }
 schedule([sayHi, sayHello, sayHey], [2, 3, 4]);
 

@@ -4,15 +4,12 @@
 
 ```js
 function objOfMatches(array1, array2, callback) {
-  let final = {};
-  for (let el of array1) {
-    for (let el2 of array2) {
-      if (callback(el) === el2) {
-        final[el] = el2;
-      }
+  return array1.reduce((acc, cv, i) => {
+    if (callback(cv) === array2[i]) {
+      acc[cv] = array2[i];
     }
-  }
-  return final;
+    return acc;
+  }, {});
 }
 
 // TEST
@@ -31,15 +28,11 @@ console.log(
 
 ```js
 function multiMap(arrVals, arrCallbacks) {
-  let final = {};
-  for (let el of arrVals) {
-    let arr = [];
-    for (let cb of arrCallbacks) {
-      arr.push(cb(el));
-    }
-    final[el] = arr;
-  }
-  return final;
+  return arrVals.reduce((acc, cv) => {
+    let values = arrCallbacks.map((fn) => fn(cv));
+    acc[cv] = values;
+    return acc;
+  }, {});
 }
 
 // TEST
@@ -69,15 +62,13 @@ The final output from the third array will be matched agains the same indexed el
 
 ```js
 function objOfMatchesWithArray(array1, array2, callback) {
-  let final = [];
-  for (let el of array1) {
-    let str = "";
-    for (let cb of callback) {
-      str += cb(el);
+  return array1.reduce((acc, cv, i) => {
+    let val = callback.reduce((acc, fn) => fn(acc), cv);
+    if (val === array2[i]) {
+      acc[cv] = array2[i];
     }
-    final.push(str);
-  }
-  return final;
+    return acc;
+  }, {});
 }
 
 // TEST
@@ -107,7 +98,13 @@ To build the object, `objectWithArrayValues` will pass each value of the first a
 In the final object the key will be the value form the first array like `hi` and value will be an array of values returned from each function like `['HI', 'Hi', 'HiHi']`
 
 ```js
-function objOfMatchesWithArray(array1, array2, callback) {}
+function objOfMatchesWithArray(array1, callback) {
+  return array1.reduce((acc, cv) => {
+    let vals = callback.map((fn) => fn(cv));
+    acc[cv] = vals;
+    return acc;
+  }, {});
+}
 
 // TEST
 console.log(
@@ -147,7 +144,15 @@ Create a function named `schedule` which accept two arguments an array of functi
 The function `schedule` will execute the function at first index after the value in value on first index in second array. i.e execute `sayHi` after `1` second and `sayHello` after `2` second.
 
 ```js
-function schedule() {}
+function schedule(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    alert("Invalid Input");
+    return;
+  }
+  arr1.forEach((fn, i) => {
+    setTimeout(fn, arr2[i] * 1000);
+  });
+}
 
 function sayHi() {
   console.log("Hi");
